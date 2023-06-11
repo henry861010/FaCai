@@ -41,7 +41,7 @@ contract FaCai is MerkleTree, ReentrancyGuard, random {
 
     constructor(
         IVerifier _verifier,
-        IHasher _hasher,
+        address _hasher,
         uint32 _merkleTreeHieght,
         uint256 _timeEnd,
         uint _prize1,

@@ -1,14 +1,18 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
-interface IHasher {
-  function MiMCSponge(uint256 in_xL, uint256 in_xR) external pure returns (uint256 xL, uint256 xR);
+interface Hasher {
+    function MiMCSponge(
+        uint256 xL_in,
+        uint256 xR_in,
+        uint256 k
+    ) external pure returns (uint256 xL, uint256 xR);
 }
 
 contract MerkleTree{
   uint256 public constant FIELD_SIZE = 21888242871839275222246405745257275088548364400416034343698204186575808495617;
   uint256 public constant ZERO_VALUE = 21663839004416932945382355908790599225266501822907911457504978515578255421292; // = keccak256("tornado") % FIELD_SIZE
-  IHasher public immutable hasher;
+  Hasher public immutable hasher;
 
   uint32 public levels;
 
@@ -23,11 +27,11 @@ contract MerkleTree{
   uint32 public currentRootIndex = 0;
   uint32 public nextIndex = 0;
 
-  constructor(uint32 _levels, IHasher _hasher) {
+  constructor(uint32 _levels, address _hasher) {
     require(_levels > 0, "_levels should be greater than zero");
     require(_levels < 32, "_levels should be less than 32");
     levels = _levels;
-    hasher = _hasher;
+    hasher = Hasher(_hasher);
 
     for (uint32 i = 0; i < _levels; i++) {
       filledSubtrees[i] = zeros(i);
@@ -40,7 +44,7 @@ contract MerkleTree{
     @dev Hash 2 tree leaves, returns MiMC(_left, _right)
   */
   function hashLeftRight(
-    IHasher _hasher,
+    Hasher _hasher,
     bytes32 _left,
     bytes32 _right
   ) public pure returns (bytes32) {
@@ -48,9 +52,10 @@ contract MerkleTree{
     require(uint256(_right) < FIELD_SIZE, "_right should be inside the field");
     uint256 R = uint256(_left);
     uint256 C = 0;
-    (R, C) = _hasher.MiMCSponge(R, C);
+    uint256 k = 0;
+    (R, C) = _hasher.MiMCSponge(R, C, k);
     R = addmod(R, uint256(_right), FIELD_SIZE);
-    (R, C) = _hasher.MiMCSponge(R, C);
+    (R, C) = _hasher.MiMCSponge(R, C, k);
     return bytes32(R);
   }
 

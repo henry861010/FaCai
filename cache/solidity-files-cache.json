@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/home/henry/blockchain_nctu/FaCai/contracts/blockchain_final.sol": {
-      "lastModificationDate": 1686454755756,
-      "contentHash": "1052b660ccd378670fbf28cf3cf7548a",
+      "lastModificationDate": 1686490440524,
+      "contentHash": "bf1c41cf2148377167548dd866cf7e76",
       "sourceName": "contracts/blockchain_final.sol",
       "solcConfig": {
         "version": "0.8.18",
@@ -39,42 +39,6 @@
       "artifacts": [
         "FaCai",
         "IVerifier"
-      ]
-    },
-    "/home/henry/blockchain_nctu/FaCai/contracts/merkletree.sol": {
-      "lastModificationDate": 1686454705939,
-      "contentHash": "b7c3433fce7ce584816b8a81686faab9",
-      "sourceName": "contracts/merkletree.sol",
-      "solcConfig": {
-        "version": "0.8.18",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.9"
-      ],
-      "artifacts": [
-        "IHasher",
-        "MerkleTree"
       ]
     },
     "/home/henry/blockchain_nctu/FaCai/contracts/random.sol": {
@@ -148,8 +112,8 @@
       ]
     },
     "/home/henry/blockchain_nctu/FaCai/contracts/verifier.sol": {
-      "lastModificationDate": 1686451608658,
-      "contentHash": "0b5c65c71f1b9fb9d6112f83e3ffbf18",
+      "lastModificationDate": 1686482792199,
+      "contentHash": "674b2d7bfcec248a67ba4795302345d6",
       "sourceName": "contracts/verifier.sol",
       "solcConfig": {
         "version": "0.8.18",
@@ -181,6 +145,77 @@
       "artifacts": [
         "Pairing",
         "Verifier"
+      ]
+    },
+    "/home/henry/blockchain_nctu/FaCai/contracts/IHasher.sol": {
+      "lastModificationDate": 1686489217915,
+      "contentHash": "efc988520b736da61bef4839ba5ca555",
+      "sourceName": "contracts/IHasher.sol",
+      "solcConfig": {
+        "version": "0.8.18",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.9"
+      ],
+      "artifacts": [
+        "IHasher"
+      ]
+    },
+    "/home/henry/blockchain_nctu/FaCai/contracts/merkletree.sol": {
+      "lastModificationDate": 1686490723461,
+      "contentHash": "07380f622122676a4b9e3fdd471d150f",
+      "sourceName": "contracts/merkletree.sol",
+      "solcConfig": {
+        "version": "0.8.18",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.9"
+      ],
+      "artifacts": [
+        "Hasher",
+        "MerkleTree"
       ]
     }
   }
