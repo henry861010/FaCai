@@ -55,7 +55,7 @@ async function  getGameInfo() {
 /**
  * Make an ETH deposit
  */
-async function deposit() {
+async function buyLottery() {
   const deposit = createDeposit(rbigint(31), rbigint(31))
   const tx = await contract.methods.deposit(toHex(deposit.commitment)).send({ value: toWei(AMOUNT), from: web3.eth.defaultAccount, gas: 2e6 })
   return deposit
@@ -66,7 +66,7 @@ async function deposit() {
  * @param note Note to withdraw
  * @param recipient Recipient address
  */
-async function withdraw(deposit) {
+async function redeem(deposit) {
   const { proof, args } = await generateSnarkProof(deposit)
   const tx = await contract.methods.withdraw(proof, ...args).send({ from: web3.eth.defaultAccount, gas: 1e6 })
 }
@@ -145,13 +145,10 @@ async function main() {
   contract = new web3.eth.Contract(require('../build/contracts/ETHTornado.json').abi, CONTRACT_ADDRESS)
   const account = web3.eth.accounts.privateKeyToAccount('0x' + PRIVATE_KEY)
   web3.eth.accounts.wallet.add('0x' + PRIVATE_KEY)
-  // eslint-disable-next-line require-atomic-updates
   web3.eth.defaultAccount = account.address
 
   const note = await deposit()
-  console.log('Deposited note:', note)
-  await withdraw(note, web3.eth.defaultAccount)
-  console.log('Done')
+  await withdraw(note)
   process.exit()
 }
 
