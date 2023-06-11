@@ -1,0 +1,7 @@
+node_modules/*
+node_cache/*
+coverage/*
+artifacts/*
+coverage/*
+circom/*
+.env
