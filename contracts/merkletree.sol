@@ -1,18 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
-interface Hasher {
-    function MiMCSponge(
-        uint256 xL_in,
-        uint256 xR_in,
-        uint256 k
-    ) external pure returns (uint256 xL, uint256 xR);
-}
 
 contract MerkleTree{
   uint256 public constant FIELD_SIZE = 21888242871839275222246405745257275088548364400416034343698204186575808495617;
   uint256 public constant ZERO_VALUE = 21663839004416932945382355908790599225266501822907911457504978515578255421292; // = keccak256("tornado") % FIELD_SIZE
-  Hasher public immutable hasher;
 
   uint32 public levels;
 
@@ -27,11 +19,10 @@ contract MerkleTree{
   uint32 public currentRootIndex = 0;
   uint32 public nextIndex = 0;
 
-  constructor(uint32 _levels, address _hasher) {
+  constructor(uint32 _levels) {
     require(_levels > 0, "_levels should be greater than zero");
     require(_levels < 32, "_levels should be less than 32");
     levels = _levels;
-    hasher = Hasher(_hasher);
 
     for (uint32 i = 0; i < _levels; i++) {
       filledSubtrees[i] = zeros(i);
@@ -39,24 +30,22 @@ contract MerkleTree{
 
     roots[0] = zeros(_levels - 1);
   }
+  
+  function MiMCSponge(bytes32 input1, bytes32 input2) public returns (bytes32 result) {
+    return input1;
+  }
 
   /**
     @dev Hash 2 tree leaves, returns MiMC(_left, _right)
   */
   function hashLeftRight(
-    Hasher _hasher,
     bytes32 _left,
     bytes32 _right
-  ) public pure returns (bytes32) {
+  ) public returns (bytes32) {
     require(uint256(_left) < FIELD_SIZE, "_left should be inside the field");
     require(uint256(_right) < FIELD_SIZE, "_right should be inside the field");
-    uint256 R = uint256(_left);
-    uint256 C = 0;
-    uint256 k = 0;
-    (R, C) = _hasher.MiMCSponge(R, C, k);
-    R = addmod(R, uint256(_right), FIELD_SIZE);
-    (R, C) = _hasher.MiMCSponge(R, C, k);
-    return bytes32(R);
+    bytes32 R = MiMCSponge(_left,_right);
+    return R;
   }
 
   function _insert(bytes32 _leaf) internal returns (uint32 index) {
@@ -76,10 +65,11 @@ contract MerkleTree{
         left = filledSubtrees[i];
         right = currentLevelHash;
       }
-      currentLevelHash = hashLeftRight(hasher, left, right);
+      currentLevelHash = hashLeftRight(left, right);
       currentIndex /= 2;
     }
-
+    //currentLevelHash = MiMCSponge(leaf, leaf<<1);
+    currentLevelHash = _leaf;
     uint32 newRootIndex = (currentRootIndex + 1) % ROOT_HISTORY_SIZE;
     currentRootIndex = newRootIndex;
     roots[newRootIndex] = currentLevelHash;

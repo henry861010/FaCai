@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/home/henry/blockchain_nctu/FaCai/contracts/blockchain_final.sol": {
-      "lastModificationDate": 1686490440524,
-      "contentHash": "bf1c41cf2148377167548dd866cf7e76",
+      "lastModificationDate": 1686595075500,
+      "contentHash": "fe332484a45452e4e5b795edcd2a0cc7",
       "sourceName": "contracts/blockchain_final.sol",
       "solcConfig": {
         "version": "0.8.18",
@@ -112,8 +112,8 @@
       ]
     },
     "/home/henry/blockchain_nctu/FaCai/contracts/verifier.sol": {
-      "lastModificationDate": 1686482792199,
-      "contentHash": "674b2d7bfcec248a67ba4795302345d6",
+      "lastModificationDate": 1686592544207,
+      "contentHash": "4c261892e1bf8e050c18fd374f8e5db2",
       "sourceName": "contracts/verifier.sol",
       "solcConfig": {
         "version": "0.8.18",
@@ -183,8 +183,8 @@
       ]
     },
     "/home/henry/blockchain_nctu/FaCai/contracts/merkletree.sol": {
-      "lastModificationDate": 1686490723461,
-      "contentHash": "07380f622122676a4b9e3fdd471d150f",
+      "lastModificationDate": 1686594838082,
+      "contentHash": "fc807f5383ad26a4172242e7b01b7a61",
       "sourceName": "contracts/merkletree.sol",
       "solcConfig": {
         "version": "0.8.18",
@@ -214,7 +214,6 @@
         "^0.8.9"
       ],
       "artifacts": [
-        "Hasher",
         "MerkleTree"
       ]
     }

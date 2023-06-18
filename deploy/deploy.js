@@ -1,13 +1,11 @@
 async function main() {
 
-   const c = await ethers.getContractFactory("IHasher");
-   const hasher  = await c.deploy();
    const b = await ethers.getContractFactory("Verifier");
    const verifier  = await b.deploy();
+   console.log("********************verifier: ", verifier.address);
    const a = await ethers.getContractFactory("FaCai");
-   const FaCai = await a.deploy(verifier,hasher.address,20,1686573816,3,2,3,1);
-   
-   console.log(FaCai.address);
+   const FaCai = await a.deploy(verifier.address,20,1686573816,3,2,1,1);
+   console.log("********************FaCai: ", FaCai.address);
 }
 
 main()
@@ -16,3 +14,4 @@ main()
     console.error(error);
     process.exit(1);
   });
+
